@@ -26,8 +26,10 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   const [testimonial, setTestimonial] = useState(0);
-  const current = sampleTestimonials[testimonial];
+  const current = sampleTestimonials[testimonial] ?? sampleTestimonials[0];
   const move = (direction: number) => setTestimonial((testimonial + direction + sampleTestimonials.length) % sampleTestimonials.length);
+  if (!current) return null;
+
   return <>
     <section className="relative min-h-[92svh] overflow-hidden bg-secondary text-secondary-foreground">
       <img src={heroImage} alt="Eventing rider and horse clearing a cross-country fence" width={1600} height={1104} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover object-[68%_center]" />
